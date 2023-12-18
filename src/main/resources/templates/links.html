@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Ваш заголовок</title>
+</head>
+<body>
+
+
+
+<div class="container" id="qwerty">
+     <div class="row">
+         <div class="col-9">
+             <ul class="nav" th:fragment="nav">
+                 <li class="nav-item">
+                     <a class="nav-link" href="/">Главная</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="/perfumery">Просмотр записей</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="/perfumery/new">Добавить запись</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="/perfumery/update">Редактировать запись</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="/perfumery/delete">Удалить запись</a>
+                 </li>
+                 <li class="nav-item">
+                     <a class="nav-link" href="/perfumery/filter">Отфильтровать записи</a>
+                 </li>
+             </ul>
+         </div>
+         <div th:switch="${#authorization.expression('isAuthenticated()')}" class="col-1">
+             <div th:case="false">
+                 <a href="/login" class="btn btn-primary" id="login">Войти</a>
+             </div>
+             <div th:case="true">
+                 <form th:method="POST" th:action="@{/logout}" id="logout">
+                     <input type="submit" class="btn btn-primary" value="Выйти">
+                 </form>
+             </div>
+             <div th:case="*">
+                 <a class="btn btn-primary">Что-то пошло не так</a>
+             </div>
+         </div>
+         <div class="col-2">
+             <a href="/registration" class="btn btn-primary">Регистрация</a>
+         </div>
+
+     </div>
+</div>
+</body>
+</html>
